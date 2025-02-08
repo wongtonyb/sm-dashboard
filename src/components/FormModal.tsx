@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
 
-// USE LAZY LOADING
+// This would load the form upon initial loading of the page
+// import TeacherForm from "./forms/TeacherForm";
+// import StudentForm from "./forms/StudentForm";
 
-import TeacherForm from "./forms/TeacherForm";
-import StudentForm from "./forms/StudentForm";
-
+// USE LAZY LOADING - this will load the form only when the button is clicked
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>,
 });

@@ -1,11 +1,14 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"; //used to validate data against zod schema
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "../InputField";
 import Image from "next/image";
 
+// https://www.npmjs.com/package/@hookform/resolvers#zod
+
+//creating the schema with zod to use for validation for form data
 const schema = z.object({
   username: z
     .string()
@@ -19,7 +22,7 @@ const schema = z.object({
   lastName: z.string().min(1, { message: "Last name is required!" }),
   phone: z.string().min(1, { message: "Phone is required!" }),
   address: z.string().min(1, { message: "Address is required!" }),
-  bloodType: z.string().min(1, { message: "Blood Type is required!" }),
+  // bloodType: z.string().min(1, { message: "Blood Type is required!" }),
   birthday: z.date({ message: "Birthday is required!" }),
   sex: z.enum(["male", "female"], { message: "Sex is required!" }),
   img: z.instanceof(File, { message: "Image is required" }),
@@ -108,13 +111,13 @@ const TeacherForm = ({
           register={register}
           error={errors.address}
         />
-        <InputField
+        {/* <InputField
           label="Blood Type"
           name="bloodType"
           defaultValue={data?.bloodType}
           register={register}
           error={errors.bloodType}
-        />
+        /> */}
         <InputField
           label="Birthday"
           name="birthday"
@@ -142,7 +145,7 @@ const TeacherForm = ({
         <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
           <label
             className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer"
-            htmlFor="img"
+            htmlFor="img" //associates this label with the input field with id="img" (technically any element on the page with this id)
           >
             <Image src="/upload.png" alt="" width={28} height={28} />
             <span>Upload a photo</span>
