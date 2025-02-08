@@ -1,4 +1,5 @@
 // import FormModal from "@/components/FormModal";
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
@@ -7,38 +8,38 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Class = {
-    id: number;
-    name: string;
-    capacity: number;
-    grade: number;
-    supervisor: string;
-  };
-  
-  const columns = [
-    {
-      header: "Class Name",
-      accessor: "name",
-    },
-    {
-      header: "Capacity",
-      accessor: "capacity",
-      className: "hidden md:table-cell",
-    },
-    {
-      header: "Grade",
-      accessor: "grade",
-      className: "hidden md:table-cell",
-    },
-    {
-      header: "Supervisor",
-      accessor: "supervisor",
-      className: "hidden md:table-cell",
-    },
-    {
-      header: "Actions",
-      accessor: "action",
-    },
-  ];
+  id: number;
+  name: string;
+  capacity: number;
+  grade: number;
+  supervisor: string;
+};
+
+const columns = [
+  {
+    header: "Class Name",
+    accessor: "name",
+  },
+  {
+    header: "Capacity",
+    accessor: "capacity",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Grade",
+    accessor: "grade",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Supervisor",
+    accessor: "supervisor",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    accessor: "action",
+  },
+];
 
 const ClassListPage = () => {
   // render elements must always return in () not {}
@@ -53,16 +54,11 @@ const ClassListPage = () => {
       <td className="hidden md:table-cell">{item.supervisor}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-smSky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-smPurple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
-            // <FormModal table="teacher" type="delete" id={item.id} />
+            <>
+              <FormModal table="announcement" type="update" data={item} />
+              <FormModal table="announcement" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -84,10 +80,10 @@ const ClassListPage = () => {
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-smYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
-              // <FormModal table="teacher" type="create" />
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-smYellow">
+              //   <Image src="/plus.png" alt="" width={14} height={14} />
+              // </button>
+              <FormModal table="class" type="create" />
             )}
           </div>
         </div>
