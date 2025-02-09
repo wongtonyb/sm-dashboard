@@ -30,3 +30,8 @@ Backend:
 
 ### In-depth Data Design
 ![diagram-export-2-8-2025-6_57_57-PM](https://github.com/user-attachments/assets/e863e19c-8375-493d-b612-ae35c675827a)
+
+
+## To Run Locally
+npx prisma studio for database
+npm run dev
