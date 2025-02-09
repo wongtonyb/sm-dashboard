@@ -6,7 +6,7 @@ import TableSearch from "@/components/TableSearch";
 import { role, teachersData } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Subject, Teacher } from "@prisma/client";
+import { Class, Prisma, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -136,6 +136,8 @@ const TeacherListPage = async ({
           // filtering teacher name's that contain the value from search
           case "search":
             query.name = { contains: value, mode: "insensitive" };
+            break;
+          default:
             break;
         }
       }
