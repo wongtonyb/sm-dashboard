@@ -115,12 +115,38 @@ const TeacherListPage = async ({
   searchParams: { [key: string]: string } | undefined;
 }) => {
   const { page, ...queryParams } = searchParams; //expect a "page" query parameter in the URL amongst other query parameters
+  // track the 'page' param, such that when we update the page number from the pagination component,
+  // it'll update the data here and re-render the rows for TeacherListPage component
   const p = page ? parseInt(page) : 1;
+
+  // URL PARAMS COINDITION
+  const query: Prisma.TeacherWhereInput = {};
+
+  // loop through the query parameters and set the query object accordingly
+  // this is used to filter the Teacher data entities based on the query parameters
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // for student looking for all teachers that teach their class
+          // students have classes, classes are related to lessons, lessons related to teacher
+          case "classId":
+            query.lessons = { some: { classId: parseInt(value) } };
+            break;
+          // filtering teacher name's that contain the value from search
+          case "search":
+            query.name = { contains: value, mode: "insensitive" };
+            break;
+        }
+      }
+    }
+  }
 
   // $transaction is used to run multiple queries in a single transaction
   // array destructing is used to store the results of the queries to multiple variables (data and count)
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
+      where: query,
       include: {
         subjects: true,
         classes: true,
@@ -128,9 +154,8 @@ const TeacherListPage = async ({
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
     }),
-    prisma.teacher.count()
-  ])
-
+    prisma.teacher.count(),
+  ]);
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -158,7 +183,7 @@ const TeacherListPage = async ({
       {/* LIST */}
       <Table columns={columns} renderRow={renderRow} data={data} />
       {/* PAGINATION */}
-      <Pagination page={p} count={count}/>
+      <Pagination page={p} count={count} />
     </div>
   );
 };

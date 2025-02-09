@@ -9,6 +9,7 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
   const changePage = (newPage: number) => {
     const params = new URLSearchParams(window.location.search); // grabs the query params from the URL
     params.set("page", newPage.toString()); // sets the 'page' query param to the new page number
+    // updating the page params, will trigger the useEffect in the parent component
     router.push(`${window.location.pathname}?${params}`); // navigate to the new URL with updated query parameters
   };
 
@@ -35,7 +36,7 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
               <button
                 key={pageIndex}
                 className={`px-2 rounded-sm ${
-                  page === pageIndex ? "bg-lamaSky" : ""
+                  page === pageIndex ? "bg-smSky" : ""
                 }`}
                 onClick={() => {
                   changePage(pageIndex);
