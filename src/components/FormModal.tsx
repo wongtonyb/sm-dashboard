@@ -49,7 +49,7 @@ const FormModal = ({
     | "announcement";
   type: "create" | "update" | "delete";
   data?: any;
-  id?: number;
+  id?: number | string;
 }) => {
   //size and color dependent on type of button
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
