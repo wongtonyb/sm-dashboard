@@ -1,6 +1,6 @@
 # sm-dashboard
 
-A school management system dashboards.
+A fully responsive school management dashboard system
 Features includes:
 - role-based clients (admin, teacher, student, parent)
 - multi-data relationships
