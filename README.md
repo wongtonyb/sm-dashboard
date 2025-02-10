@@ -2,8 +2,12 @@
 
 A school management system dashboards.
 Features includes:
-- multiple login clients (admin, teacher, student, parent)
-- multi-object relationships
+- role-based clients (admin, teacher, student, parent)
+- multi-data relationships
+- secure authentication and protected routing
+
+![image](https://github.com/user-attachments/assets/9d9b1ce6-1198-42ef-8ba8-657d254100ce)
+
 
 ## Technologies
 
@@ -34,4 +38,5 @@ Backend:
 
 ## To Run Locally
 npx prisma studio for database
+
 npm run dev
