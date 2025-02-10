@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
-  const router = useRouter(); //allows you to navigates to another role
+  const router = useRouter(); //allows you to navigates to another /role URL
 
   useEffect(() => {
     const role = user?.publicMetadata.role;
@@ -23,7 +23,8 @@ const LoginPage = () => {
       //prevents you from accessing login page, when already logged in
       router.push(`/${role}`);
     }
-  }, [user, router]);
+  }, [user, router]); //dependency array, whenever one of these variables changes, rerun this useEffect func
+
   return (
     <div className="h-screen flex items-center justify-center bg-smSkyLight">
       <SignIn.Root>
