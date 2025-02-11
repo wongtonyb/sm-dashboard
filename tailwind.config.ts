@@ -1,28 +1,28 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+   content: [
+      './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+   ],
+   theme: {
+      extend: {
+         backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'gradient-conic':
+               'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+         },
+         colors: {
+            smSky: '#C3EBFA',
+            smSkyLight: '#EDF9FD',
+            smPurple: '#CFCEFF',
+            smPurpleLight: '#F1F0FF',
+            smYellow: '#FAE27C',
+            smYellowLight: '#FEFCE8',
+         },
       },
-      colors:{
-        smSky: "#C3EBFA",
-        smSkyLight: "#EDF9FD",
-        smPurple: "#CFCEFF",
-        smPurpleLight: "#F1F0FF",
-        smYellow: "#FAE27C",
-        smYellowLight: "#FEFCE8"
-      }
-    },
-  },
-  plugins: [],
-};
-export default config;
+   },
+   plugins: [],
+}
+export default config

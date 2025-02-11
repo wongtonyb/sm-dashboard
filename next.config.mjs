@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //configure next/images to allow images from pexels.com
-  images: {
-    remotePatterns: [{ hostname: "images.pexels.com" }],
-  },
-};
+   //configure next/images to allow images from pexels.com
+   images: {
+      remotePatterns: [{ hostname: 'images.pexels.com' }],
+   },
+}
 
-export default nextConfig;
+export default nextConfig
