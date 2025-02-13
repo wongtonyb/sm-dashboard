@@ -1,6 +1,9 @@
 // https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding
 // https://www.prisma.io/docs/orm/prisma-client
 
+//must migrate schema first
+//npx prisma migrate dev --name init
+
 // used to seed the database with some initial data
 // npx prisma db seed
 
