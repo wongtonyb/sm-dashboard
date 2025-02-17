@@ -1,4 +1,8 @@
-// import FormModal from "@/components/FormModal";
+//Main list/subjects page
+
+// "use client"
+
+import FormContainer from '@/components/FormContainer'
 import FormModal from '@/components/FormModal'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
@@ -8,6 +12,7 @@ import { ITEM_PER_PAGE } from '@/lib/settings'
 import { role } from '@/lib/util'
 import { Prisma, Subject, Teacher } from '@prisma/client'
 import Image from 'next/image'
+// import { useEffect } from 'react'
 
 type SubjectList = Subject & { teachers: Teacher[] }
 
@@ -34,13 +39,15 @@ const renderRow = (item: SubjectList) => (
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-smPurpleLight"
    >
       <td className="flex items-center gap-4 p-4">{item.name}</td>
-      <td className="hidden md:table-cell">{item.teachers.join(', ')}</td>
+      <td className="hidden md:table-cell">
+         {item.teachers.map((teacher) => teacher.name).join(', ')}
+      </td>
       <td>
          <div className="flex items-center gap-2">
             {role === 'admin' && (
                <>
-                  <FormModal table="subject" type="update" data={item} />
-                  <FormModal table="subject" type="delete" id={item.id} />
+                  <FormContainer table="subject" type="update" data={item} />
+                  <FormContainer table="subject" type="delete" id={item.id} />
                </>
             )}
          </div>
@@ -73,7 +80,7 @@ const SubjectListPage = async ({
       }
    }
 
-   // data query
+   // data query (GET)
    const [data, count] = await prisma.$transaction([
       prisma.subject.findMany({
          where: query,
@@ -85,6 +92,23 @@ const SubjectListPage = async ({
       }),
       prisma.subject.count({ where: query }),
    ])
+
+   // trying to set the data from the API to the state
+   // useEffect(() => {
+      // const fetchSubjects = async () => {
+      //    try {
+      //       const response = await fetch('/api/subjects')
+      //       const result = await response.json()
+      //       if (result.success) {
+      //          //   setData(result.data)
+      //          console.log(result.data)
+      //       }
+      //    } catch (error) {
+      //       console.error('Error fetching data:', error)
+      //    }
+      // }
+      // fetchSubjects();
+   // }, [])
 
    return (
       <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

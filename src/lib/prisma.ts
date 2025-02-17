@@ -18,3 +18,7 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient }
 export const prisma = globalForPrisma.prisma || new PrismaClient()
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+/*
+The prisma = new PrismaClient() statement creates a new instance of the Prisma database client that manages database connections and queries.
+*/
