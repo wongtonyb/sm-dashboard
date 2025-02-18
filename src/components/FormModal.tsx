@@ -1,4 +1,4 @@
-//Renders the Create, Update, and Delete buttons for each table
+//Directs what form to render based on the type of form (create, update, delete) as well as the table (subject, class, teacher, student, exam)
 //Child to list/{table}/page.tsx
 //Parent to components/forms/{Table}Forms.tsx
 

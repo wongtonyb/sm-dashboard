@@ -33,10 +33,7 @@ const SubjectForm = ({
       resolver: zodResolver(subjectSchema),
    })
 
-   //teacher data fetched from FormContainer
-   console.log('relatedData:', relatedData)
-   const { teachers } = relatedData;
-
+   
    // React 19 useActionState
    // handles error and success states
    const [state, formAction] = useFormState(
@@ -46,9 +43,15 @@ const SubjectForm = ({
          error: false,
       }
    )
-
+   
+   // handles form submission in one function
+   const onSubmit = handleSubmit((data) => {
+      console.log(data)
+      formAction(data)
+   })
+   
    const router = useRouter()
-
+   
    useEffect(() => {
       if (state.success) {
          toast(`Subject has been ${type === 'create' ? 'created' : 'updated'}!`)
@@ -58,13 +61,12 @@ const SubjectForm = ({
    }, [state, router, type, setOpen])
    //dependency array specifies the variables that the effect depends on
    //the effect will run whenever any of these variables changes
+   
 
-   // handles form submission in one function
-   const onSubmit = handleSubmit((data) => {
-      console.log(data)
-      formAction(data)
-   })
-
+   //teacher data fetched from FormContainer
+   console.log('relatedData:', relatedData)
+   const { teachers } = relatedData;
+   
    return (
       <form className="flex flex-col gap-8" onSubmit={onSubmit}>
          {/* <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}> */}
