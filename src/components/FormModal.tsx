@@ -4,7 +4,7 @@
 
 'use client'
 
-import { deleteClass, deleteSubject } from '@/lib/actions'
+import { deleteClass, deleteSubject, deleteTeacher } from '@/lib/actions'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -15,7 +15,8 @@ import { FormContainerProps } from './FormContainer'
 
 const deleteActionMap = {
    subject: deleteSubject,
-   class: deleteClass
+   class: deleteClass,
+   teacher: deleteTeacher
 }
 
 // This would load the form upon initial loading of the page
@@ -44,9 +45,14 @@ const forms: {
       relatedData?: any
    ) => JSX.Element
 } = {
-   // teacher: (setOpen, type, data, relatedData) => (
-   //    <TeacherForm type={type} data={data} setOpen={setOpen} relatedData ={relatedData} />
-   // ),
+   teacher: (setOpen, type, data, relatedData) => (
+      <TeacherForm
+         type={type}
+         data={data}
+         setOpen={setOpen}
+         relatedData={relatedData}
+      />
+   ),
    // student: (setOpen, type, data, relatedData) => (
    //    <StudentForm type={type} data={data} setOpen={setOpen} relatedData ={relatedData} />
    // ),
@@ -98,21 +104,23 @@ const FormModal = ({
 
    //decide what type of form to populate (delete, create, update)
    const Form = () => {
-
-      const [state, formAction] = useFormState(deleteActionMap[table as keyof typeof deleteActionMap], {
-         success: false,
-         error: false,
-       });
-   
-       const router = useRouter();
-   
-       useEffect(() => {
-         if (state.success) {
-           toast(`${table} has been deleted!`);
-           setOpen(false);
-           router.refresh();
+      const [state, formAction] = useFormState(
+         deleteActionMap[table as keyof typeof deleteActionMap],
+         {
+            success: false,
+            error: false,
          }
-       }, [state, router]);
+      )
+
+      const router = useRouter()
+
+      useEffect(() => {
+         if (state.success) {
+            toast(`${table} has been deleted!`)
+            setOpen(false)
+            router.refresh()
+         }
+      }, [state, router])
 
       // use this form for delete
       return type === 'delete' && id ? (
@@ -127,7 +135,7 @@ const FormModal = ({
             </button>
          </form>
       ) : type === 'create' || type === 'update' ? (
-         forms[table](setOpen, type, data, relatedData)  // use this form for create/update (contains input fields)
+         forms[table](setOpen, type, data, relatedData) // use this form for create/update (contains input fields)
       ) : (
          'Form not found!'
       )

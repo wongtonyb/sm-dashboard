@@ -37,11 +37,10 @@ export const teacherSchema = z.object({
     .string()
     .email({ message: "Invalid email address!" })
     .optional()
-    .or(z.literal("")),
+    .or(z.literal("")), //can be empty string or must be a valid email
   phone: z.string().optional(),
   address: z.string(),
   img: z.string().optional(),
-  bloodType: z.string().min(1, { message: "Blood Type is required!" }),
   birthday: z.coerce.date({ message: "Birthday is required!" }),
   sex: z.enum(["MALE", "FEMALE"], { message: "Sex is required!" }),
   subjects: z.array(z.string()).optional(), // subject ids

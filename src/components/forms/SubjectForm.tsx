@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import InputField from '../InputField'
 import { subjectSchema, SubjectSchema } from '@/lib/formValidationSchemas'
 import { createSubject, updateSubject } from '@/lib/actions'
@@ -94,6 +94,7 @@ const SubjectForm = ({
                register={register}
                error={errors?.name}
             />
+            {/* id needs to be passed into form for handling update, but we dont want to update it, thus its hidden */}
             {data && (
                <InputField
                   label="Id"
