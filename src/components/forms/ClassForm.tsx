@@ -21,7 +21,6 @@ const ClassForm = ({
    setOpen: Dispatch<SetStateAction<boolean>>
    relatedData?: any
 }) => {
-   console.log('relatedData from ClassForm', relatedData) // relatedData not being passed down
    const {
       register,
       handleSubmit,
@@ -54,7 +53,8 @@ const ClassForm = ({
       }
    }, [state, router, type, setOpen])
 
-   //    const { teachers, grades } = relatedData
+      const { teachers, grades } = relatedData
+      // console.log('relatedData from ClassForm', relatedData) // relatedData not being passed down
 
    return (
       <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -87,7 +87,7 @@ const ClassForm = ({
                   hidden
                />
             )}
-            {/* <div className="flex flex-col gap-2 w-full md:w-1/4">
+            <div className="flex flex-col gap-2 w-full md:w-1/4">
                <label className="text-xs text-gray-500">Supervisor</label>
                <select
                   className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
@@ -138,7 +138,7 @@ const ClassForm = ({
                      {errors.gradeId.message.toString()}
                   </p>
                )}
-            </div> */}
+            </div>
          </div>
          {state.error && (
             <span className="text-red-500">Something went wrong!</span>

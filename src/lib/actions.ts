@@ -15,7 +15,8 @@ export const createSubject = async (
    currentState: CurrentState,
    data: SubjectSchema
 ) => {
-   console.log(data + 'in server action')
+   // await console.log('currentState', currentState)
+   // await console.log('data', data)
    try {
       await prisma.subject.create({
          data: {
@@ -100,7 +101,6 @@ export const createClass = async (
        data,
      });
  
-     // revalidatePath("/list/class");
      return { success: true, error: false };
    } catch (err) {
      console.log(err);
@@ -120,7 +120,6 @@ export const createClass = async (
        data,
      });
  
-     // revalidatePath("/list/class");
      return { success: true, error: false };
    } catch (err) {
      console.log(err);
@@ -140,7 +139,6 @@ export const createClass = async (
        },
      });
  
-     // revalidatePath("/list/class");
      return { success: true, error: false };
    } catch (err) {
      console.log(err);

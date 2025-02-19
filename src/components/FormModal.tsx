@@ -4,7 +4,7 @@
 
 'use client'
 
-import { deleteSubject } from '@/lib/actions'
+import { deleteClass, deleteSubject } from '@/lib/actions'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -15,6 +15,7 @@ import { FormContainerProps } from './FormContainer'
 
 const deleteActionMap = {
    subject: deleteSubject,
+   class: deleteClass
 }
 
 // This would load the form upon initial loading of the page

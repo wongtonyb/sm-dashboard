@@ -43,12 +43,23 @@ const SubjectForm = ({
          error: false,
       }
    )
+   // initializes state
+   // initializes formAction function
+   // ie. formAction = createSubject({success: false, error: false}, data)
    
    // handles form submission in one function
    const onSubmit = handleSubmit((data) => {
-      console.log(data)
+      console.log('data on submit', data)
       formAction(data)
    })
+   // the data is the form data in react-hook-form via register
+   /*
+      {
+         name: string
+         id?: string
+         teachers: string[]
+      }
+   */
    
    const router = useRouter()
    
@@ -64,9 +75,10 @@ const SubjectForm = ({
    
 
    //teacher data fetched from FormContainer
-   console.log('relatedData:', relatedData)
    const { teachers } = relatedData;
-   
+   // if undefined make sure its passed down through FormContainer
+   // console.log('relatedData:', relatedData)
+
    return (
       <form className="flex flex-col gap-8" onSubmit={onSubmit}>
          {/* <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}> */}

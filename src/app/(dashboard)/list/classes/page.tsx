@@ -50,7 +50,7 @@ const renderRow = (item: ClassList) => (
    >
       <td className="flex items-center gap-4 p-4">{item.name}</td>
       <td className="hidden md:table-cell">{item.capacity}</td>
-      <td className="hidden md:table-cell">{item.name[0]}</td>
+      <td className="hidden md:table-cell">{item.gradeId}</td>
       <td className="hidden md:table-cell">
          {item.supervisor.name + ' ' + item.supervisor.surname}
       </td>
@@ -129,7 +129,7 @@ const ClassListPage = async ({
                      // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-smYellow">
                      //   <Image src="/plus.png" alt="" width={14} height={14} />
                      // </button>
-                     <FormModal table="class" type="create" />
+                     <FormContainer table="class" type="create" />
                   )}
                </div>
             </div>

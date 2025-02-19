@@ -1,7 +1,8 @@
 //Child to list/{table}/page.tsx
 //Parent to FormModal.tsx
 
-//used to grab related data that may be needed for create/update/delete
+// used to grab related data that may be needed for create/update/delete
+// such as dropdown options to populate in the form
 
 import FormModal from "./FormModal";
 import { prisma } from "@/lib/prisma";
@@ -46,7 +47,6 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         const classGrades = await prisma.grade.findMany({
           select: { id: true, level: true },
         });
-        // await console.log('classGrades', classGrades)
         const classTeachers = await prisma.teacher.findMany({
           select: { id: true, name: true, surname: true },
         });
