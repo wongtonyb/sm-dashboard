@@ -39,6 +39,16 @@ Backend:
 
 ## To Run Locally
 
-npx prisma studio for database
-
 npm run dev
+
+# other commands
+for database
+
+npx prisma studio 
+
+
+to update schema and apply new migration to database
+
+npx prisma migrate dev --name <migration-name>
+
+
