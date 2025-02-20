@@ -162,7 +162,7 @@ const TeacherForm = ({
                   multiple
                   className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
                   {...register('subjects')}
-                  defaultValue={data?.sex}
+                  defaultValue={data?.subjects}
                >
                   {subjects.map((subject: { id: number; name: string }) => (
                      <option value={subject.id} key={subject.id}>

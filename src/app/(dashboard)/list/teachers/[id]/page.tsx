@@ -82,7 +82,7 @@ const SingleTeacherPage = async ({
                               height={14}
                            />
                            <span>
-                              {new Intl.DateTimeFormat('en-GB').format(
+                              {new Intl.DateTimeFormat('en-US').format(
                                  teacher.birthday
                               )}
                            </span>
