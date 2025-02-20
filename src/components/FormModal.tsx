@@ -4,7 +4,12 @@
 
 'use client'
 
-import { deleteClass, deleteSubject, deleteTeacher } from '@/lib/actions'
+import {
+   deleteClass,
+   deleteStudent,
+   deleteSubject,
+   deleteTeacher,
+} from '@/lib/actions'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -16,7 +21,8 @@ import { FormContainerProps } from './FormContainer'
 const deleteActionMap = {
    subject: deleteSubject,
    class: deleteClass,
-   teacher: deleteTeacher
+   teacher: deleteTeacher,
+   student: deleteStudent,
 }
 
 // This would load the form upon initial loading of the page
@@ -53,9 +59,14 @@ const forms: {
          relatedData={relatedData}
       />
    ),
-   // student: (setOpen, type, data, relatedData) => (
-   //    <StudentForm type={type} data={data} setOpen={setOpen} relatedData ={relatedData} />
-   // ),
+   student: (setOpen, type, data, relatedData) => (
+      <StudentForm
+         type={type}
+         data={data}
+         setOpen={setOpen}
+         relatedData={relatedData}
+      />
+   ),
    subject: (setOpen, type, data, relatedData) => (
       <SubjectForm
          type={type}
