@@ -10,40 +10,39 @@ import { auth } from '@clerk/nextjs/server'
 import { Announcement, Class, Prisma } from '@prisma/client'
 import Image from 'next/image'
 
-const { sessionClaims } = await auth()
-const role = (sessionClaims?.metadata as { role?: string })?.role
-
-type AnnouncementList = Announcement & { class: Class }
-
-const columns = [
-   {
-      header: 'Title',
-      accessor: 'title',
-   },
-   {
-      header: 'Class',
-      accessor: 'class',
-   },
-   {
-      header: 'Date',
-      accessor: 'date',
-      className: 'hidden md:table-cell',
-   },
-   ...(role === 'admin'
-      ? [
-           {
-              header: 'Actions',
-              accessor: 'action',
-           },
-        ]
-      : []),
-]
-
 const AnnonucementListPage = async ({
    searchParams,
 }: {
    searchParams: { [key: string]: string | undefined }
 }) => {
+   const { sessionClaims } = await auth()
+   const role = (sessionClaims?.metadata as { role?: string })?.role
+
+   type AnnouncementList = Announcement & { class: Class }
+
+   const columns = [
+      {
+         header: 'Title',
+         accessor: 'title',
+      },
+      {
+         header: 'Class',
+         accessor: 'class',
+      },
+      {
+         header: 'Date',
+         accessor: 'date',
+         className: 'hidden md:table-cell',
+      },
+      ...(role === 'admin'
+         ? [
+              {
+                 header: 'Actions',
+                 accessor: 'action',
+              },
+           ]
+         : []),
+   ]
    // render elements must always return in () not {}
    const renderRow = (item: AnnouncementList) => (
       <tr
