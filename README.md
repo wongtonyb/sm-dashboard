@@ -41,6 +41,8 @@ Backend:
 
 npm run dev
 
+postgres database needs to be set up before running
+
 # other commands
 for database
 
