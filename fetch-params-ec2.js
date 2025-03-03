@@ -1,18 +1,21 @@
-const AWS = require('aws-sdk');
+const { SSMClient, GetParametersByPathCommand } = require('@aws-sdk/client-ssm');
+const axios = require('axios');
 const fs = require('fs');
-const metadata = new AWS.MetadataService();
-const ssm = new AWS.SSM({ region: 'us-east-1' }); // Add this line and specify your region
+
+// Initialize SSM client
+const ssmClient = new SSMClient({ region: 'us-east-1' });
 
 async function createEnvFile() {
     try {
       // Get parameters by path
       const params = {
-        Path: '/sm-dashboar/.env/',
+        Path: '/sm-dashboard/.env/',
         Recursive: true,
         WithDecryption: true
       };
       
-      const response = await ssm.getParametersByPath(params).promise();
+      const command = new GetParametersByPathCommand(params);
+      const response = await ssmClient.send(command);
       
       // Create .env file content
       let envContent = '';
@@ -30,17 +33,17 @@ async function createEnvFile() {
     }
 }
 
-// Use a promise-based approach for metadata
-function checkIfEC2() {
-  return new Promise((resolve, reject) => {
-    metadata.request('/latest/meta-data/instance-id', (err, data) => {
-      if (!err && data) {
-        resolve(data); // Running on EC2
-      } else {
-        resolve(false); // Not running on EC2
-      }
+// Check if running on EC2 using axios to query the metadata service
+async function checkIfEC2() {
+  try {
+    // Set a short timeout to quickly determine if we're on EC2
+    const response = await axios.get('http://169.254.169.254/latest/meta-data/instance-id', {
+      timeout: 1000
     });
-  });
+    return response.data; // Return the instance ID
+  } catch (error) {
+    return false; // Not running on EC2 or cannot access metadata service
+  }
 }
 
 // Main function using async/await
