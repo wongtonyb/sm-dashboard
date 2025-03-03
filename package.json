@@ -6,6 +6,7 @@
       "dev": "next dev",
       "build": "next build",
       "build-ec2": "rm -rf .next && next build",
+      "prestart": "node fetch-params-ec2.js",
       "start": "next start",
       "lint": "next lint",
       "format": "prettier --write ."
