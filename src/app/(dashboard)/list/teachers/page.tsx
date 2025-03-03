@@ -114,7 +114,7 @@ const renderRow = (item: TeacherList) => (
 )
 
 const TeacherListPage = async ({
-   searchParams, // searchParams is an object containing the query parameters from the URL; provided by Next.js
+   searchParams = {}, // searchParams is an object containing the query parameters from the URL; provided by Next.js. provide a default empty object (to avoid type error)
 }: {
    searchParams: { [key: string]: string } | undefined
 }) => {
